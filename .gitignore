@@ -1,0 +1,64 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.tfvars
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Azure
+.azure/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Kubernetes Secrets
+secret.yaml
+secrets.yaml
+*kubeconfig*
+*.kubeconfig
+
+# Helm
+charts/*.tgz
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Node
+node_modules/
+npm-debug.log
+
+# Large Archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Certificates
+*.pem
+*.key
+*.crt
+*.pfx
+
+# Temporary Files
+tmp/
+temp/

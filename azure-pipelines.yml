@@ -1,0 +1,12 @@
+trigger:
+- main
+
+pool:
+  name: ShivamPC
+
+steps:
+- script: |
+    echo "Hello Shivam"
+    pwd
+    ls -la
+  displayName: 'Test Pipeline'
