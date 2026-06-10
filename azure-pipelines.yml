@@ -20,9 +20,5 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              pwd
-              dir
               cd parentmodule
-              pwd
-              dir
-              terraform init
+              terraform init -no-color
