@@ -21,4 +21,4 @@ stages:
             targetType: 'inline'
             script: |
               cd parentmodule
-              terraform fmt
+              pwd
