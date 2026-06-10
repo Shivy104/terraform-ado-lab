@@ -7,17 +7,27 @@ pool:
  name: shivampc
 
 stages:
-  - stage: TerraformCheckStage
+  - stage: TerraformInstallStage
+    displayName: Terraform Install Karenge
     jobs:
-      - job: TerraformJobCheck
+      - job: TerraformInstallJob
+        displayName: Terraform Install Wali Job
         steps:
-        - task: PowerShell@2
-          inputs:
-            targetType: 'inline'
-            script: 'terraform version'
-
-        - task: PowerShell@2
-          inputs:
-            targetType: 'inline'
-            script: 'terraform init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/AKS/parentmodule'
+          - task: TerraformInstaller@1
+            displayName: Terraform Install Wala Task
+            inputs:
+              terraformVersion: 'latest'
+  - stage: TerraformInitStage
+    displayName: Terraform Init Stage
+    jobs:
+      - job: TerraformInitJob
+        displayName: Terraform Init Job
+        steps:
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
+              backendAzureRmStorageAccountName: 'stg123'
+              backendAzureRmContainerName: 'billucontainer'
+              backendAzureRmKey: 'micro.tfstate'
