@@ -21,6 +21,4 @@ stages:
             targetType: 'inline'
             script: |
               cd parentmodule
-              pwd
-              dir
-              terraform fmt -recursive
+              terraform init
