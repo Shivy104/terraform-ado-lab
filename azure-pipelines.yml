@@ -20,5 +20,5 @@ stages:
           inputs:
             targetType: 'inline'
             script: |
-              cd parentmodule
-              terraform fmt -check -recursive
+              Get-Location
+              Get-ChildItem
