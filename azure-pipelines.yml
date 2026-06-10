@@ -27,6 +27,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
               backendServiceArm: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
               backendAzureRmStorageAccountName: 'stg123'
               backendAzureRmContainerName: 'billucontainer'
@@ -40,6 +41,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
               backendServiceArm: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
               backendAzureRmStorageAccountName: 'stg123'
               backendAzureRmContainerName: 'billucontainer'
@@ -49,4 +51,71 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
               environmentServiceNameAzureRM: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
+
+
+  - stage: TerraformTFSec
+    displayName: Terraform Tf Sec Wali Stage
+    jobs:
+      - job: TerraformTFSecwaliJob
+        displayName: Terraform TF Sec wali Job
+        steps:
+            - task: PowerShell@2
+              displayName: Terraform TF Sec Task
+              inputs:
+                targetType: 'inline'
+                script: 'tfsec'
+                workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
+
+
+  - stage: TerraformTFLintStage
+    displayName: Terraform Linting Stage
+    jobs:
+      - job: TerraformLintingJob
+        displayName: Terraform Linting Job
+        steps:
+            - task: PowerShell@2
+              continueOnError: True
+              inputs:
+                targetType: 'inline'
+                script: 'tflint'
+                workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
+
+
+  - stage: TerraformManualValidationStage
+    pool: server
+    displayName: Terraform Manual Validation Stage
+    jobs:
+      - job: TerraformManualValidationWaliJob
+        displayName:   Terraform Manual Validation Job
+        steps:
+             - task: ManualValidation@1
+               inputs:
+                 notifyUsers: 'shivammagotra8@gmail.com'
+                 approvers: 'Shivam'
+
+
+  - stage: TerraformApplyStage
+    displayName: Terraform Apply Stage
+    jobs:
+      - job: TerraformApplyJob
+        displayName: Terraform Apply Job
+        steps:
+         - task: TerraformTask@5
+           displayName: Terraform Init Task
+           inputs:
+             provider: 'azurerm'
+             command: 'init'
+             workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
+             backendServiceArm: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
+             backendAzureRmStorageAccountName: 'stg123'
+             backendAzureRmContainerName: 'billucontainer'
+             backendAzureRmKey: 'micro.tfstate'
+         - task: TerraformTask@5
+           displayName: Terraform Apply Task
+           inputs:
+             provider: 'azurerm'
+             command: 'apply'
+             workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
+             environmentServiceNameAzureRM: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
