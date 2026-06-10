@@ -18,7 +18,5 @@ stages:
 
         - task: PowerShell@2
           inputs:
-            targetType: 'inline'
-            script: |
-              cd parentmodule
-              terraform init -no-color
+            filePath: '$(System.DefaultWorkingDirectory)'
+            arguments: 'terraform init'
