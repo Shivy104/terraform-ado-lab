@@ -18,5 +18,6 @@ stages:
 
         - task: PowerShell@2
           inputs:
-            arguments: 'terraform init'
+            targetType: 'inline'
+            script: 'terraform init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/parentmodule'
