@@ -31,3 +31,22 @@ stages:
               backendAzureRmStorageAccountName: 'stg123'
               backendAzureRmContainerName: 'billucontainer'
               backendAzureRmKey: 'micro.tfstate'
+  - stage: TerraformPlanStage
+    displayName: Terraform Plan Stage
+    jobs:
+      - job: TerraformPlanJob
+        steps:
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
+              backendAzureRmStorageAccountName: 'stg123'
+              backendAzureRmContainerName: 'billucontainer'
+              backendAzureRmKey: 'micro.tfstate'
+
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              environmentServiceNameAzureRM: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
