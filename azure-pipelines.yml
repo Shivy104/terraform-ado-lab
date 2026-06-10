@@ -27,7 +27,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/parentmodule'
               backendServiceArm: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
               backendAzureRmStorageAccountName: 'stg123'
               backendAzureRmContainerName: 'billucontainer'
@@ -41,7 +41,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/parentmodule'
               backendServiceArm: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
               backendAzureRmStorageAccountName: 'stg123'
               backendAzureRmContainerName: 'billucontainer'
@@ -51,7 +51,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              workingDirectory: '$(System.DefaultWorkingDirectory)\parentmodule'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/parentmodule'
               environmentServiceNameAzureRM: 'Azure subscription 1(987a65a0-736a-4e2d-b5d6-e128ea597ab6)'
 
 
